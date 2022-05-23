@@ -20,3 +20,6 @@ mongoose.connect(process.env.DB_URL).then(()=>{
 }).catch((error)=>console.log(error));
 
 app.use("/auth",require("./routers/userRouter"));
+app.use("/order",require("./routers/orderRouter"));
+app.use("/cart",require("./routers/cartRouter"));
+

@@ -16,7 +16,7 @@ router.post("/",async(req,res)=>{
         if(password.length < 5){
             return res.status(400).json({errorMessage: "Plese enter password more the 6 character"});
         }
-        
+                
         if(phoneNo.length < 10){
             return res.status(400).json({errorMessage: "Plese enter phone number 10 digit"});
         }
