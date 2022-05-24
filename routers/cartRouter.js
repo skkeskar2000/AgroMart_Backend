@@ -23,14 +23,18 @@ router.post("/addcart", async (req,res)=>{
         })
         const findCart = await cart.findOne({userId : userId,productName:productName});
         if(findCart){
+            price = productPrice + findCart["productPrice"];
+            // console.log(price);
             const updateCart = await cart.updateOne({userId : userId,productName:productName},
                 {
-                    $set :
+                    $inc :
                     {
-                        "productQuantity" : "2",
-                    }
-                }
+                        "productQuantity" : 1,
+                    },   
+                },
+                // {$set: {"productPrice": price}}
                 );
+                // console.log(updateCart);
             return res.status(200).send({message : "Added to Cart Successfully"});
         }
 
@@ -44,6 +48,7 @@ router.post("/addcart", async (req,res)=>{
 
     }
 });
+
 
 router.get("/getcart",async(req,res)=>{
     try{
