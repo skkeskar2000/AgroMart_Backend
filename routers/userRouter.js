@@ -5,7 +5,7 @@ const User = require("../model/userModel");
 router.post("/",async(req,res)=>{
     try{
     
-        const {email, password, passwordVerify, name ,phoneNo} = req.body;
+        const {email, password, passwordVerify, name ,phoneNo,address} = req.body;
 
         console.log(req.body);
         //validation
@@ -35,6 +35,7 @@ router.post("/",async(req,res)=>{
             password,
             name,
             phoneNo,
+            address
         })
 
         const savedUser = await newUser.save();
@@ -53,8 +54,6 @@ router.post("/login",async(req,res)=>{
             return res.status(400).json({errorMessage : "Plese Enter all required filled "});
         }
         const existingUser = await User.findOne({email});
-
-        // console.log(existingUser);
 
         if(!existingUser){
             return res.status(401).json({errorMessage : "Wrong Password or email"});
